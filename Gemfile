@@ -51,3 +51,4 @@ gem "twitter-bootstrap-rails"
 gem 'thinking-sphinx', '3.0.5'
 
 gem 'devise'
+gem "cancan"

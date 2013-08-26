@@ -38,16 +38,16 @@
   </head>
   <body>
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-fluid-top">
       <div class="navbar-inner">
-        <div class="container">
+        <div class="container-fluid">
           <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="#">Fanfiction</a>
-          <div class="container nav-collapse">
+          <div class="container-fluid nav-collapse">
             <ul class="nav">
               <li><%= link_to "Link1", "/path1"  %></li>
               <li><%= link_to "Link2", "/path2"  %></li>
@@ -58,27 +58,26 @@
       </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-          <div class="span9">
-            <%= bootstrap_flash %>
-            <%= yield %>
-          </div>
-          <div class="span3">
-            <div class="well sidebar-nav">
-              <h3>Sidebar</h3>
-              <ul class="nav nav-list">
-                <li class="nav-header">Sidebar</li>
-                <li><%= link_to "Link1", "/path1"  %></li>
-                <li><%= link_to "Link2", "/path2"  %></li>
-                <li><%= link_to "Link3", "/path3"  %></li>
-              </ul>
-            </div><!--/.well -->
-          </div><!--/span-->
-        </div><!--/row-->
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Sidebar</li>
+              <li><%= link_to "Link1", "/path1"  %></li>
+              <li><%= link_to "Link2", "/path2"  %></li>
+              <li><%= link_to "Link3", "/path3"  %></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+          <%= bootstrap_flash %>
+          <%= yield %>
+        </div>
+      </div><!--/row-->
 
       <footer>
-        <p>&copy; Murzik34 2013</p>
+        <p>&copy; Company 2013</p>
       </footer>
 
     </div> <!-- /container -->

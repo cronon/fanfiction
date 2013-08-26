@@ -1,0 +1,3 @@
+[1m[37m      invoke[0m  active_record
+[1m[32m      remove[0m    db/migrate/20130826214836_add_role_to_user.rb
+[1m[32m      create[0m    db/migrate/20130826224210_add_role_to_user.rb
