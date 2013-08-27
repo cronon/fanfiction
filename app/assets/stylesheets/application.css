@@ -11,3 +11,12 @@
  *= require_self
  *= require_tree .
  */
+#tag_cloud {
+  width: 230px;
+  line-height: 1.6em; }
+  #tag_cloud .s {
+    font-size: 0.8em; }
+  #tag_cloud .m {
+    font-size: 1.2em; }
+  #tag_cloud .l {
+    font-size: 1.8em; }

@@ -6,6 +6,9 @@ class BooksController < ApplicationController
   def index
     if params[:search]
       @books = Book.search(Riddle.escape(params[:search]))
+      if @books ==[]
+        flash[:notice]='There is no search results'
+      end
     elsif params[:tag]
         @books = Book.tagged_with(params[:tag]).paginate(page: params[:page], per_page: items_per_page)
     else
