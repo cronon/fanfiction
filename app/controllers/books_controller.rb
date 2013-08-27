@@ -4,7 +4,13 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    if params[:search]
+      @books = Book.search(Riddle.escape(params[:search]))
+    elsif params[:tag]
+        @books = Book.tagged_with(params[:tag]).paginate(page: params[:page], per_page: items_per_page)
+    else
+        @books = Book.paginate(page: params[:page], per_page: items_per_page)
+    end
     #current_ability
   end
 
@@ -71,6 +77,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :description)
+      params.require(:book).permit(:title, :description, :tag_list)
     end
 end

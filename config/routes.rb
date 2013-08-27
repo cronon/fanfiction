@@ -8,6 +8,10 @@ Fanfiction::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'books#index'
 
+  Fanfiction::Application.routes.draw do
+    get 'tags/:tag', to: 'books#index', as: :tag
+    resources :books
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

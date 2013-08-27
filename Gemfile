@@ -53,3 +53,5 @@ gem 'thinking-sphinx', '3.0.5'
 gem 'devise'
 gem "cancan"
 gem 'acts-as-taggable-on'
+
+gem 'will_paginate'

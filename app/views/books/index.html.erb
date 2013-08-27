@@ -7,6 +7,8 @@
     <tr>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -15,6 +17,8 @@
       <tr>
         <td><%= book.title %></td>
         <td><%= book.description %></td>
+        <td><%= book.user.username if book.user %></td>
+        <td><%=l book.created_at %></td>
         <td>
           <%if can? :ud, book %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -30,7 +34,7 @@
     <% end %>
   </tbody>
 </table>
-
+<%= will_paginate @books %>
 <% if can? :create, @books.first %>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_book_path,

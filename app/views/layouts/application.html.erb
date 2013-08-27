@@ -46,14 +46,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Fanfiction</a>
+          <%= link_to 'Fanfiction', root_path, :class => "brand" %>
           <div class="container nav-collapse">
             <ul class="nav">
               <li><%= link_to "Link1", "/path1"  %></li>
               <li><%= link_to "Link2", "/path2"  %></li>
               <li><%= link_to "Link3", "/path3"  %></li>
             </ul>
+            <form id="custom-search-form" class="form-search form-horizontal pull-right">
+              <div class="input-append span3">
+                <input name="search" type="text" class="search-query" placeholder="Search">
+                <button type="submit" class="btn" value="Search"><i class="icon-search"></i></button>
+              </div>
+            </form>
           </div><!--/.nav-collapse -->
+
         </div>
       </div>
     </div>
@@ -83,6 +90,15 @@
                     <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
                 <% end %>
                 </div><!--/.well -->
+              <div class="well sidebar-nav">
+              <h3>Tags cloud</h3>
+              <div id="tag_cloud">
+                <% tag_cloud Book.tag_counts, %w{s m l} do |tag, css_class| %>
+                    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+                <% end %>
+              </div>
+            </div><!--/.well -->
+              
           </div><!--/span-->
           <div class="span3">
             <div class="well sidebar-nav">
