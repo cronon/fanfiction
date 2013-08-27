@@ -20,7 +20,7 @@
         <td><%= book.description %></td>
         <td><%=l book.created_at %></td>
         <td>
-          <%if can? :update, @book %>
+          <%if book.user_id==@current_user.id %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_book_path(book), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
