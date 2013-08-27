@@ -11,6 +11,12 @@
       <%= f.text_field :description, :class => 'text_field' %>
     </div>
   </div>
+  <div class="control-group">
+    <div class="field">
+      <%= f.label :tag_list, "Tags (separated by commas)" %><br />
+      <%= f.text_field :tag_list %>
+    </div>
+  </div>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
