@@ -6,8 +6,8 @@ class BooksController < ApplicationController
   def index
     if params[:search]
       @books = Book.search(Riddle.escape(params[:search]))
-      if @books ==[]
-        flash[:notice]='There is no search results'
+      if @books.empty?
+        redirect_to root_url, notice: 'There is no search results'
       end
     elsif params[:tag]
         @books = Book.tagged_with(params[:tag]).paginate(page: params[:page], per_page: items_per_page)
@@ -20,6 +20,7 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+    @chapters=@book.chapters
   end
 
   # GET /books/new

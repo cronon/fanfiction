@@ -1,6 +1,12 @@
 Fanfiction::Application.routes.draw do
+  
+
+  #resources :chapters
+
   devise_for :users
-  resources :books
+  resources :books do
+    resources :chapters 
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -8,10 +14,14 @@ Fanfiction::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'books#index'
 
-  Fanfiction::Application.routes.draw do
+  # Fanfiction::Application.routes.draw do
+  resources :chapters
+
+  # resources :chapters
+
     get 'tags/:tag', to: 'books#index', as: :tag
     resources :books
-  end
+  #end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

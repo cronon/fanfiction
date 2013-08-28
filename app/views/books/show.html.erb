@@ -8,6 +8,8 @@
   <dd><%= @book.title %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @book.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:tag_list) %>:</strong></dt>
+  <dd><%= @book.tag_list %></dd>
 </dl>
 
 <div class="form-actions">
@@ -21,3 +23,32 @@
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
 </div>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Book</th>
+      <th>Integer</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @chapters.each do |chapter| %>
+      <tr>
+        <td><%= chapter.title %></td>
+        <td><%= chapter.content %></td>
+        <td><%= link_to 'Show', book_chapter_url(@book.id, chapter.id) %></td>
+        <td><%= link_to 'Edit', edit_book_chapter_path(@book.id, chapter.id) %></td>
+        <td><%= link_to 'Destroy', book_chapter_path(@book.id, chapter.id) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Chapter', new_book_chapter_path(@book.id) %>
