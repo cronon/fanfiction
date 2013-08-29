@@ -5,18 +5,20 @@
       <%= f.text_field :title, :class => 'text_field' %>
     </div>
   </div>
+  
   <div class="control-group">
     <%= f.label :description, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_area :description, :class => 'text_field' %>
     </div>
   </div>
+
   <div class="control-group">
-    <div class="field">
-      <%= f.label :tag_list, "Tags (separated by commas)" %><br />
-      <%= f.text_field :tag_list %>
+      <%= f.label :tag_list, "Tags (separated by commas)" %>
+      <div class="controls" class="select2-container select2-container-multi" >
+          <%= f.text_field :tag_list, data: {autocomplete_source: Book.tag_counts.map(&:name)} %>
+      </div>
     </div>
-  </div>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
