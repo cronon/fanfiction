@@ -8,6 +8,7 @@ Fanfiction::Application.routes.draw do
     resources :chapters 
   end
 
+  post "markitup/preview"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -15,12 +16,8 @@ Fanfiction::Application.routes.draw do
   root 'books#index'
 
   # Fanfiction::Application.routes.draw do
-  resources :chapters
-
-  # resources :chapters
 
     get 'tags/:tag', to: 'books#index', as: :tag
-    resources :books
   #end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

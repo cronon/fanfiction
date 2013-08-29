@@ -7,7 +7,7 @@
   <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
   <dd><%= @book.title %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @book.description %></dd>
+  <dd><%= markdown(@book.description) %></dd>
   <dt><strong><%= model_class.human_attribute_name(:tag_list) %>:</strong></dt>
   <dd><%= @book.tag_list %></dd>
 </dl>

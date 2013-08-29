@@ -55,3 +55,8 @@ gem "cancan"
 gem 'acts-as-taggable-on'
 
 gem 'will_paginate'
+
+gem 'redcarpet'
+gem 'markitup-rails'
+
+gem "select2-rails"
