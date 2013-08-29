@@ -1,6 +1,13 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
+  #POST /books/1/like
+  def like
+    book=Book.where(:id => params[:id]).first
+    book.liked_by current_user
+    redirect_to root_url
+  end
+
   # GET /books
   # GET /books.json
   def index

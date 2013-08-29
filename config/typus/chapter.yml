@@ -1,0 +1,8 @@
+# Use the README file as a reference to customize settings.
+
+Chapter:
+  fields:
+    default: title, content, book_id
+    form: title, content, book_id
+  relationships: 
+  application: Application
