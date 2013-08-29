@@ -23,7 +23,7 @@ Typus.setup do |config|
 
   # Define authentication: +:none+, +:http_basic+, +:session+
   # Run `rails g typus:migration` if want +:session+
-  # config.authentication = :none
+  config.authentication = :devise
 
   # Define username and password for +:http_basic+ authentication.
   # config.username = "admin"

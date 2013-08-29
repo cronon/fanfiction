@@ -3,9 +3,12 @@ class BooksController < ApplicationController
 
   #POST /books/1/like
   def like
-    book=Book.where(:id => params[:id]).first
-    book.liked_by current_user
-    redirect_to root_url
+    @book=Book.where(:id => params[:id]).first
+    @book.liked_by current_user
+    respond_to do |format|
+      format.js
+    end
+    #redirect_to root_url
   end
 
   # GET /books
@@ -48,6 +51,7 @@ class BooksController < ApplicationController
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.js 
         format.json { render action: 'show', status: :created, location: @book }
       else
         format.html { render action: 'new' }
