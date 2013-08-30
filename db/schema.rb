@@ -116,7 +116,11 @@ ActiveRecord::Schema.define(version: 20130829124301861) do
     t.datetime "updated_at"
     t.string   "username"
     t.binary   "admin",                  limit: 1, default: "b'0'"
-    t.string   "role",                             default: "user"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.string   "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
