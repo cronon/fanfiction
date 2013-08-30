@@ -20,9 +20,11 @@ class BooksController < ApplicationController
         redirect_to root_url, notice: 'There is no search results'
       end
     elsif params[:tag]
-        @books = Book.tagged_with(params[:tag]).paginate(page: params[:page], per_page: items_per_page)
+      @books = Book.tagged_with(params[:tag]).paginate(page: params[:page], per_page: items_per_page)
+    elsif params[:category]
+      @books = Book.where(:category => params[:category]).paginate(page: params[:page], per_page: items_per_page)
     else
-        @books = Book.paginate(page: params[:page], per_page: items_per_page)
+      @books = Book.paginate(page: params[:page], per_page: items_per_page)
     end
     #current_ability
   end

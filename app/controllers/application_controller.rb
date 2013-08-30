@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_action :get_categories
 
  #  def current_ability
  #    @current_ability ||= Ability.new(current_user)
@@ -12,6 +13,10 @@ class ApplicationController < ActionController::Base
 
   def items_per_page
     @items_per_page=10
+  end
+
+  def get_categories
+    @categories = ['Movies','Books','Cartoons','Comics']
   end
 
   protected

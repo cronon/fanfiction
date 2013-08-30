@@ -49,9 +49,9 @@
           <%= link_to 'Fanfiction', root_path, :class => "brand" %>
           <div class="container nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+              <% @categories.each do |category| %>
+                <li><%= link_to category, category_path(:category => category) %> </li>
+              <% end %>  
             </ul>
             <form id="custom-search-form" class="form-search form-horizontal pull-right">
               <div class="input-append span3">

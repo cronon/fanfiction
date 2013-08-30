@@ -12,6 +12,7 @@ Fanfiction::Application.routes.draw do
   root 'books#index'
 
   get 'tags/:tag', to: 'books#index', as: :tag
+  get 'categories/:category', to: 'books#index', as: :category
 
   post 'books/:id/like', to: 'books#like', as: :like
   #end
