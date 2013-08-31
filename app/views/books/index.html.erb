@@ -26,7 +26,7 @@
           <%= button_to 'Like', like_path(book), method: :post, remote: true, :id => 'btn_like' %>
           <%if can? :ud, book %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_book_path(book), :class => 'btn btn-mini', remote: true %>
+                      edit_book_path(book), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       book_path(book),
                       :method => :delete,
