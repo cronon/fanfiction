@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  impressionist :actions=>[:index,:show]
 
   #POST /books/1/like
   def like
@@ -14,6 +15,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
+
     if params[:search]
       @books = Book.search(Riddle.escape(params[:search]))
       if @books.empty?
@@ -32,6 +34,8 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+    @widget = Book.find(params[:id])
+    impressionist(@widget,message:"wtf is a widget?")
     @chapters=@book.chapters
   end
 

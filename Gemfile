@@ -64,3 +64,5 @@ gem "select2-rails"
 gem 'typus', :git => 'https://github.com/fesplugas/typus.git'
 
 gem 'acts_as_votable', '~> 0.7.1'
+
+gem 'impressionist'

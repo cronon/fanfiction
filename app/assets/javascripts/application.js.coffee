@@ -6,6 +6,8 @@
 #= require markitup
 #= require markitup/sets/markdown/set
 #= require select2
+#= require jquery.jqplot.min.js
+#= require plugins/jqplot.dateAxisRenderer.min.js
 
 jQuery ->
   $("textarea").markItUp markdownSettings

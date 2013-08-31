@@ -58,7 +58,11 @@ GEM
     erubis (2.7.0)
     execjs (2.0.0)
     hike (1.2.3)
+    httpclient (2.3.4.1)
     i18n (0.6.5)
+    impressionist (1.4.6)
+      httpclient (~> 2.2)
+      nokogiri (~> 1.6.0)
     innertube (1.1.0)
     jbuilder (1.5.1)
       activesupport (>= 3.0.0)
@@ -83,9 +87,12 @@ GEM
       rails (>= 3.1)
     middleware (0.1.0)
     mime-types (1.24)
+    mini_portile (0.5.1)
     minitest (4.7.5)
     multi_json (1.7.9)
     mysql2 (0.3.13)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
     rack (1.5.2)
@@ -170,6 +177,7 @@ DEPENDENCIES
   cancan
   coffee-rails (~> 4.0.0)
   devise
+  impressionist
   jbuilder (~> 1.2)
   jquery-rails
   jquery-turbolinks
