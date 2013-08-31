@@ -47,9 +47,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <%= link_to 'Murzik34', root_path %>
+          
           <div class="container nav-collapse">
+
             <ul class="nav">
+              <li><%= link_to 'Murzik34', root_path %></li>
               <% @categories.each do |category| %>
                 <li><%= link_to category, category_path(:category => category) %> </li>
               <% end %>  
@@ -85,7 +87,9 @@
                 <% else %>
                     <%= link_to "Sign up", new_user_registration_path %> |
                     <%= link_to "Login", new_user_session_path %>
-                <% end %>
+                <% end %> <br>
+                <%= link_to "dark", theme_path(:dark) %> |
+                <%= link_to "light", theme_path(:light) %>
                 </div><!--/.well -->
               <div class="well sidebar-nav">
               <h3>Tags cloud</h3>

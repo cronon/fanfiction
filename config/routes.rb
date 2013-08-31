@@ -14,6 +14,7 @@ Fanfiction::Application.routes.draw do
   get 'tags/:tag', to: 'books#index', as: :tag
   get 'categories/:category', to: 'books#index', as: :category
   get 'authors/:author', to: 'books#index', as: :author
+  get 'theme/:theme', to: 'application#set_theme', as: :theme
 
   post 'books/:id/like', to: 'books#like', as: :like
   #end

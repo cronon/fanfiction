@@ -11,6 +11,15 @@ class ApplicationController < ActionController::Base
  #    @current_ability ||= Ability.new(current_user)
   # end
 
+  # theme/dark.css
+  def set_theme
+    if ['dark','light'].include?(params[:theme])
+      current_user.theme = params[:theme]+'.css'
+      current_user.save
+    end
+    redirect_to root_path
+  end
+
   def items_per_page
     @items_per_page=10
   end
