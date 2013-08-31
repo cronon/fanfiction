@@ -15,16 +15,20 @@
   <tbody>
     <% @books.each do |book| %>
     <% book.impressionist_count %>
-      <tr>
+      <tr id='tr<%= book.id %>'>
         <td><%= book.title %></td>
         <td><%= book.description %></td>
         <td><%= book.user.username if book.user %></td>
         <td><%=l book.created_at %></td>
         <td>
           <% @book = book %>
+          
+          <%= link_to t('.read', :default => t("helpers.links.show")),
+                      book_path(book), :class => 'btn btn-mini' %>
           <%= render :partial => 'like' %>
           <%= button_to 'Like', like_path(book), method: :post, remote: true, :id => 'btn_like' %>
           <%if can? :ud, book %>
+          
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_book_path(book), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

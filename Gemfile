@@ -61,7 +61,7 @@ gem 'markitup-rails'
 
 gem "select2-rails"
 
-gem 'typus', :git => 'https://github.com/fesplugas/typus.git'
+gem "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "4-0-stable"
 
 gem 'acts_as_votable', '~> 0.7.1'
 
