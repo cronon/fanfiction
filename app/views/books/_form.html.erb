@@ -16,7 +16,7 @@
   <div class="control-group">
       <%= f.label :category, :class => 'control-label' %>
       <div class="controls">
-        <%= select_tag(:city_id, options_for_select(@categories)) %>
+        <%= collection_select(:book, :category, @categories, :to_s, :to_s) %>
       </div>
     </div>
 
