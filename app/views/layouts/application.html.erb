@@ -35,7 +35,7 @@
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
     <%= javascript_include_tag "application" %>
-    <%= stylesheet_link_tag current_user.theme %>
+    <%= stylesheet_link_tag  current_user.nil? ? 'light.css' : current_user.theme %>
   </head>
   <body>
 
