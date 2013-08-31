@@ -15,12 +15,13 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-
     if params[:search]
       @books = Book.search(Riddle.escape(params[:search]))
       if @books.empty?
         redirect_to root_url, notice: 'There is no search results'
       end
+    elsif params[:author]
+      @books=Book.where(:user_id => User.where(:username => params[:author])).paginate(page: params[:page], per_page: items_per_page)
     elsif params[:tag]
       @books = Book.tagged_with(params[:tag]).paginate(page: params[:page], per_page: items_per_page)
     elsif params[:category]
@@ -35,7 +36,7 @@ class BooksController < ApplicationController
   # GET /books/1.json
   def show
     @widget = Book.find(params[:id])
-    impressionist(@widget,message:"wtf is a widget?")
+    impressionist(@widget)
     @chapters=@book.chapters
   end
 

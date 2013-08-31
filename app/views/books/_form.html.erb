@@ -16,7 +16,7 @@
   <div class="control-group">
       <%= f.label :category, :class => 'control-label' %>
       <div class="controls">
-        <%= collection_select(:book, :category, @categories, :to_s, :to_s) %>
+        <%= collection_select(:book, :category, @categories, :to_s, :to_s, {}, {:class => "selectpicker", :'data-style' =>"btn-primary"}) %>
       </div>
     </div>
 
