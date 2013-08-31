@@ -5,7 +5,7 @@ class ChaptersController < ApplicationController
   # GET /chapters
   # GET /chapters.json
   def index
-    @chapters = @book.chapters.all
+    @chapters = Chapter.where(:book_id => @book.id).paginate(page: params[:page], per_page: chapters_per_page)
   end
 
   # GET /chapters/1

@@ -20,8 +20,12 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  def items_per_page
-    @items_per_page=10
+  def books_per_page
+    1
+  end
+
+  def chapters_per_page
+    1
   end
 
   def get_categories

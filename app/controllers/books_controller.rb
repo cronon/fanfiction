@@ -15,19 +15,21 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
+    puts @books_per_page.to_s + '!!!!!!!!!!!!!!!!!!!#############'
+    puts '!!!!!!!!!!!!!!!!!!!#############'
     if params[:search]
       @books = Book.search(Riddle.escape(params[:search]))
       if @books.empty?
         redirect_to root_url, notice: 'There is no search results'
       end
     elsif params[:author]
-      @books=Book.where(:user_id => User.where(:username => params[:author])).paginate(page: params[:page], per_page: items_per_page)
+      @books=Book.where(:user_id => User.where(:username => params[:author])).paginate(page: params[:page], per_page: books_per_page)
     elsif params[:tag]
-      @books = Book.tagged_with(params[:tag]).paginate(page: params[:page], per_page: items_per_page)
+      @books = Book.tagged_with(params[:tag]).paginate(page: params[:page], per_page: books_per_page)
     elsif params[:category]
-      @books = Book.where(:category => params[:category]).paginate(page: params[:page], per_page: items_per_page)
+      @books = Book.where(:category => params[:category]).paginate(page: params[:page], per_page: books_per_page)
     else
-      @books = Book.paginate(page: params[:page], per_page: items_per_page)
+      @books = Book.paginate(page: params[:page], per_page: books_per_page)
     end
     #current_ability
   end
@@ -37,7 +39,7 @@ class BooksController < ApplicationController
   def show
     @widget = Book.find(params[:id])
     impressionist(@widget)
-    @chapters=@book.chapters
+    @chapters=Chapter.where(:book_id => @book.id).paginate(page: params[:page], per_page: chapters_per_page)
   end
 
   # GET /books/new
