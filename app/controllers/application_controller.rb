@@ -33,8 +33,6 @@ class ApplicationController < ActionController::Base
     if ['en','ru'].include? params[:locale]
       current_user.language = params[:locale] 
       current_user.save    
-      puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-      puts current_user.language
       I18n.locale = params[:locale] || I18n.default_locale
       puts I18n.locale
       redirect_to :back

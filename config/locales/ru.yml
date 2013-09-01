@@ -281,6 +281,7 @@ ru:
   show: 'Показать'
   edit: 'Редактировать'
   destroy: 'Удалить'
+  by: ''
   chapters:
     new:
       back: 'Назад'

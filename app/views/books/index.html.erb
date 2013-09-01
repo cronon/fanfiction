@@ -2,50 +2,42 @@
 <div class="page-header">
   <!--<h1><%=t '.title', :default => model_class.model_name.human.pluralize(count:2), :count=>2 %></h1> -->
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @books.each do |book| %>
-    <% book.impressionist_count %>
-      <tr id='tr<%= book.id %>'>
-        <td><%= book.title %></td>
-        <td><%= book.description %></td>
-        <td><%= book.user.username if book.user %></td>
-        <td><%=l book.created_at %></td>
-        <td>
-          <% @book = book %>
-          
-          <%= link_to t('.read', :default => t("helpers.links.show")),
-                      book_path(book), :class => 'btn btn-mini' %>
-          <%= render :partial => 'like' %>
-          <%= button_to 'Like', like_path(book), method: :post, remote: true, :id => 'btn_like' %>
 
-          <%if can? :ud, book %>          
-            <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_book_path(book), :class => 'btn btn-mini' %>
-            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+<% @books.each do |book| %>
+<% book.impressionist_count %>
+<% @book = book %>
+  <div id='tr<%= book.id %>' class="well sidebar-nav">   
+    <div class="container-fluid"> 
+      <div class="row-fluid">         
+        <div class="span8">
+          <h2><%= book.title %></h2> 
+          <%= book.created_at.to_time.strftime('%H:%M %-d %b %Y') %></td>
+          <i> <%= t(:by) %> <%= link_to book.user.username, author_path(u  book.user.username) if book.user %> </i> <br>
+          <%= book.description %>            
+        </div>
+        <%= render :partial => 'like' %>  
+      </div> 
+      <% if can? :ud, book %> 
+        <div class="form-search form-horizontal">          
+            <div class="pull-left">        
+            <%= button_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_book_path(book), {:class => 'btn'} %>
+            </div>   
+            <%= button_to t('.destroy', :default => t("helpers.links.destroy")),
                         book_path(book),
                         :method => :delete,
                         :remote => true,
                         :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                        :class => 'btn btn-mini btn-danger' %>
-          <% end %>          
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                        :class => 'btn btn-danger' %>          
+        </div>
+      <% end %>
+    </div>      
+  </div>
+<% end %>
+
 <%= will_paginate @books %>
 <% if can? :create, @books.first %>
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<%= button_to t('.new', :default => t("helpers.links.new")),
             new_book_path,
             :class => 'btn btn-primary' %>
 <% end %>
