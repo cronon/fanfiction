@@ -10,7 +10,7 @@
     <%=f.label :description %>
   </div>
   <div class="control-group">
-    <%= f.text_area :description, :class => 'text_field' %>
+    <%= f.text_area :description, :class => 'text_field', :style => "width:480px;", :rows => "10" %>
   </div>
 
   <div class="control-group">
@@ -22,14 +22,13 @@
 
   <div class="control-group">
       <%= f.label :tag_list %>
-      <div class="controls" class="select2-container select2-container-multi" >
-          <%= f.text_field :tag_list, data: {autocomplete_source: Book.tag_counts.map(&:name)} %>
-      </div>
-    </div>
-
+  </div>
+  <div class="controls" class="select2-container select2-container-multi" >
+      <%= f.text_field :tag_list, data: {autocomplete_source: Book.tag_counts.map(&:name)} %>
+  </div>
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                books_path, :class => 'btn' %>
+                :back, :class => 'btn' %>
   </div>
 <% end %>

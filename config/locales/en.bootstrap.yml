@@ -11,6 +11,8 @@ en:
       destroy: "Delete"
       new: "New"
       edit: "Edit"
+      read: "Read"
+      new_chapter: "New chapter"
     titles:
       edit: "Edit %{model}"
       save: "Save %{model}"

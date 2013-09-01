@@ -1,25 +1,21 @@
-<%= form_for([@book,@chapter]) do |f| %>
-  <% if @chapter.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@chapter.errors.count, "error") %> prohibited this chapter from being saved:</h2>
-
-      <ul>
-      <% @chapter.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+<%= form_for [@book,@chapter], :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :title %>
   </div>
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content, :class => 'text_field' %>
+  <div class="control-group">
+    <%= f.text_field :title, :class => 'text_field' %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="control-group">
+    <%=f.label :content %>
+  </div>
+  <div class="control-group">
+    <%= f.text_area :content, :class => 'text_field', :id => "markItUp" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+                :back, :class => 'btn' %>
   </div>
 <% end %>

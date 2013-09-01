@@ -10,5 +10,5 @@
 #= require plugins/jqplot.dateAxisRenderer.min.js
 
 jQuery ->
-  $("textarea").markItUp markdownSettings
+  $("#markItUp").markItUp markdownSettings
   $("#book_tag_list").select2({tags: $("#book_tag_list").data('autocomplete-source'), width: 240}  )

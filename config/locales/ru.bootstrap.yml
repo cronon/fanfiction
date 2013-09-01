@@ -11,6 +11,8 @@ ru:
       destroy: "Удалить"
       new: "Создать"
       edit: "Редактировать"
+      read: "Читать"
+      new_chapter: "Новая глава"
     titles:
       edit: "Редактировать %{model}"
       save: "Сохранить %{model}"

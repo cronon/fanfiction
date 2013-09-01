@@ -1,58 +1,67 @@
-<%- model_class = Book -%>
-<div class="page-header">
-  <h1><%=@book.title %></h1>
-</div>
+<% book = @book %>
+  <div id='tr<%= book.id %>' class="well sidebar-nav">   
+    <div class="container-fluid"> 
+      <div class="row-fluid">         
+        <div class="span8">
+          <h2><%= link_to book.title, book_path(book) %></h2> 
+          <%= book.created_at.to_time.strftime('%H:%M %-d %b %Y') %></td>
+          <i> <%= t(:by) %> <%= link_to book.user.username, author_path(u  book.user.username) if book.user %> </i> <br>
+          <%= book.description %>            
+        </div>
+        <%= render :partial => 'like' %>  
+      </div> 
+      <% if can? :ud, book %> 
+        <div class="form-search form-horizontal">            
+            <div class="pull-left">        
+            <%= button_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_book_path(book),
+                        :method => :get, 
+                        :class => 'btn' %>
+            </div>   
+            <%= button_to t('.destroy', :default => t("helpers.links.destroy")),
+                        book_path(book),
+                        :method => :delete,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-danger' %>          
+        </div>
+      <% end %>
+    </div>      
+  </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @book.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user) %>:</strong></dt>
-  <dd><%= @book.user.username %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:category) %>:</strong></dt>
-  <dd><%= @book.category %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= markdown(@book.description) %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:tag_list) %>:</strong></dt>
-  <dd><%= @book.tag_list %></dd>
-</dl>
-
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              books_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_book_path(@book), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              book_path(@book),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-</div>
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Book</th>
-      <th>Integer</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @chapters.each do |chapter| %>
-      <tr>
-        <td><%= chapter.title %></td>
-        <td><%= chapter.content %></td>
-        <td><%= link_to 'Show', book_chapter_url(@book.id, chapter.id) %></td>
-        <td><%= link_to 'Edit', edit_book_chapter_path(@book.id, chapter.id) %></td>
-        <td><%= link_to 'Destroy', book_chapter_path(@book.id, chapter.id) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
 <br>
-<%= will_paginate @chapters %>
-<%= link_to 'New Chapter', new_book_chapter_path(@book.id) %>
+<% i = 0 %>
+<% @chapters.each do |chapter| %>
+  <div id='chapter-<%= chapter.id %>' class="well">   
+    <div class="container-fluid"> 
+      <div class="row-fluid">         
+        <div class="span8">
+          <% i+=1 %>
+          <b><%= link_to chapter.title, book_chapters_path(@book)+"?page=#{i}" %> </b>
+          <i><%= @book.created_at.to_time.strftime('%H:%M %-d %b %Y') %> </i>
+        </div>  
+      </div> 
+      <% if can? :ud, @book %> 
+        <div class="form-search form-horizontal">          
+            <div class="pull-left">        
+            <%= button_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_book_chapter_path(@book,chapter),
+                        :method => :get, 
+                        :class => 'btn btn-mini' %>
+            </div>   
+            <%= button_to t('.destroy', :default => t("helpers.links.destroy")),
+                        book_chapter_path(@book,chapter),
+                        :method => :delete,
+                        :remote => true,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-mini btn-danger' %>          
+        </div>
+      <% end %>
+    </div>      
+  </div>
+<% end %>
+
+<%= button_to t('.new_chapter', :default => t("helpers.links.new_chapter")),
+                        new_book_chapter_path(@book.id),
+                        :method => :get,
+                        :class => 'btn btn-primary' %> 

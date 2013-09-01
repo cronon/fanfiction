@@ -62,7 +62,8 @@ class ChaptersController < ApplicationController
     @chapter = @book.chapters.where(:id => params[:id]).first 
     @chapter.destroy                            
     respond_to do |format|                      
-      format.html { redirect_to book_chapters_path(@book) }         
+      format.html { redirect_to book_chapters_path(@book) } 
+      format.js        
       format.json { head :no_content }               
     end
   end

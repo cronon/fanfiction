@@ -10,7 +10,7 @@
     <div class="container-fluid"> 
       <div class="row-fluid">         
         <div class="span8">
-          <h2><%= book.title %></h2> 
+          <h2><%= link_to book.title, book_path(book) %></h2> 
           <%= book.created_at.to_time.strftime('%H:%M %-d %b %Y') %></td>
           <i> <%= t(:by) %> <%= link_to book.user.username, author_path(u  book.user.username) if book.user %> </i> <br>
           <%= book.description %>            
@@ -21,7 +21,9 @@
         <div class="form-search form-horizontal">          
             <div class="pull-left">        
             <%= button_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_book_path(book), {:class => 'btn'} %>
+                        edit_book_path(book),
+                        :method => :get, 
+                        :class => 'btn' %>
             </div>   
             <%= button_to t('.destroy', :default => t("helpers.links.destroy")),
                         book_path(book),
@@ -39,5 +41,6 @@
 <% if can? :create, @books.first %>
 <%= button_to t('.new', :default => t("helpers.links.new")),
             new_book_path,
+            :method => :get,
             :class => 'btn btn-primary' %>
 <% end %>

@@ -1,0 +1,1 @@
+$('#chapter-<%= @chapter.id %>').html("");

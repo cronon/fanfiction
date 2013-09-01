@@ -20,15 +20,17 @@ class BooksController < ApplicationController
       if @books.empty?
         redirect_to root_url, notice: 'There is no search results'
       end
+      return
     elsif params[:author]
-      @books=Book.where(:user_id => User.where(:username => params[:author])).paginate(page: params[:page], per_page: books_per_page)
+      @books=Book.where(:user_id => User.where(:username => params[:author]))
     elsif params[:tag]
-      @books = Book.tagged_with(params[:tag]).paginate(page: params[:page], per_page: books_per_page)
+      @books = Book.tagged_with(params[:tag])
     elsif params[:category]
-      @books = Book.where(:category => params[:category]).paginate(page: params[:page], per_page: books_per_page)
+      @books = Book.where(:category => params[:category])
     else
       @books = Book.paginate(page: params[:page], per_page: books_per_page)
     end
+    @books=@books.order(:created_at => :desc).paginate(page: params[:page], per_page: books_per_page)
     #current_ability
   end
 
@@ -37,7 +39,7 @@ class BooksController < ApplicationController
   def show
     @widget = Book.find(params[:id])
     impressionist(@widget)
-    @chapters=Chapter.where(:book_id => @book.id).paginate(page: params[:page], per_page: chapters_per_page)
+    @chapters=Chapter.where(:book_id => @book.id)
   end
 
   # GET /books/new
