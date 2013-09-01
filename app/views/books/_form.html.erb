@@ -7,7 +7,7 @@
   </div>
 
   <div class="control-group">
-    <%= f.label :description %>
+    <%=f.label :description %>
   </div>
   <div class="control-group">
     <%= f.text_area :description, :class => 'text_field' %>
@@ -21,7 +21,7 @@
     </div>
 
   <div class="control-group">
-      <%= f.label :tag_list, "Tags (separated by commas)" %>
+      <%= f.label :tag_list %>
       <div class="controls" class="select2-container select2-container-multi" >
           <%= f.text_field :tag_list, data: {autocomplete_source: Book.tag_counts.map(&:name)} %>
       </div>

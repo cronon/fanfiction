@@ -17,9 +17,9 @@
       <tr>
         <td><%= chapter.title %></td>
         <td><%= chapter.content %></td>
-        <td><%= link_to 'Show', book_chapter_path(@book, chapter) %></td>
-        <td><%= link_to 'Edit', edit_book_chapter_path(@book, chapter) %></td>
-        <td><%= link_to 'Destroy', [@book, chapter], :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, method: :delete %></td>
+        <td><%= link_to t(:show), book_chapter_path(@book, chapter) %></td>
+        <td><%= link_to t(:edit), edit_book_chapter_path(@book, chapter) %></td>
+        <td><%= link_to t(:destroy), [@book, chapter], :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>

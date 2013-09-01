@@ -253,5 +253,37 @@ ru:
     errors:
       <<: *errors
   activerecord:
+    models:
+      book: 
+        one: ''
+        other: 'Книги'
+        few: 'Книги'
+        many: 'Книг'
+      chapter:
+        one: ''
+        other: 'Главы'
+        few: 'Главы'
+        many: 'Глав'
+    attributes:
+      book:
+        title: 'Название'
+        description: 'Описание'
+        user_id: 'Автор'
+        user: 'Автор'
+        category: 'Категория'
+        tag_list: 'Тэги'
+        created_at: 'Написано'
+      chapter:
+        title: 'Название'
+        content: 'Глава'
     errors:
       <<: *errors
+  show: 'Показать'
+  edit: 'Редактировать'
+  destroy: 'Удалить'
+  chapters:
+    new:
+      back: 'Назад'
+    edit:
+      show: 'Показать'
+      back: 'Назад'

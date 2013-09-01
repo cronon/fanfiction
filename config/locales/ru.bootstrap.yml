@@ -12,7 +12,7 @@ ru:
       new: "Создать"
       edit: "Редактировать"
     titles:
-      edit: "Редактироать %{model}"
+      edit: "Редактировать %{model}"
       save: "Сохранить %{model}"
       new: "Создать %{model}"
       delete: "Удалить %{model}"
