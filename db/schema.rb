@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 20130829124301861) do
     t.string   "unconfirmed_email"
     t.string   "role",                   default: "user"
     t.string   "theme",                  default: "light.css"
+    t.string   "language",               default: "en"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

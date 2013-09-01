@@ -66,3 +66,5 @@ gem "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "4-0-sta
 gem 'acts_as_votable', '~> 0.7.1'
 
 gem 'impressionist'
+
+gem 'actionpack-action_caching'

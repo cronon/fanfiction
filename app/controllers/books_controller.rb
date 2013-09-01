@@ -15,8 +15,6 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    puts @books_per_page.to_s + '!!!!!!!!!!!!!!!!!!!#############'
-    puts '!!!!!!!!!!!!!!!!!!!#############'
     if params[:search]
       @books = Book.search(Riddle.escape(params[:search]))
       if @books.empty?

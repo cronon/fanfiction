@@ -88,8 +88,10 @@
                     <%= link_to "Sign up", new_user_registration_path %> |
                     <%= link_to "Login", new_user_session_path %>
                 <% end %> <br>
-                <%= link_to "dark", theme_path(:dark) %> |
-                <%= link_to "light", theme_path(:light) %>
+                <%= link_to "dark", theme_path(:dark), method: :post %> |
+                <%= link_to "light", theme_path(:light), method: :post %> <br>
+                <%= link_to "en", locale_path(:en), method: :post %> |
+                <%= link_to "ru", locale_path(:ru), method: :post %>
                 </div><!--/.well -->
               <div class="well sidebar-nav">
               <h3>Tags cloud</h3>
