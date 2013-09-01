@@ -54,7 +54,7 @@ gem 'devise'
 gem "cancan"
 gem 'acts-as-taggable-on'
 
-gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 gem 'redcarpet'
 gem 'markitup-rails'

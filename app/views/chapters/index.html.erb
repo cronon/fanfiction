@@ -30,5 +30,4 @@
     </div>      
   </div>
 <% end %>
-<br>
-<%= will_paginate(@chapters) %>
+<%= will_paginate(@chapters, renderer: BootstrapPagination::Rails) %>

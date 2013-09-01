@@ -288,3 +288,6 @@ ru:
     edit:
       show: 'Показать'
       back: 'Назад'
+  will_paginate:
+    previous_label: '<<'
+    next_label: '>>'
