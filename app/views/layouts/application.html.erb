@@ -56,12 +56,14 @@
                 <li><%= link_to category, category_path(:category => category) %> </li>
               <% end %>  
             </ul>
-            <form id="custom-search-form" class="form-search form-horizontal pull-right">
-              <div class="input-append span3">
-                <input name="search" type="text" class="search-query" placeholder="Search">
-                <button type="submit" class="btn" value="Search"><i class="icon-search"></i></button>
-              </div>
-            </form>
+
+            <%= form_tag books_path, :method => 'get' do %>
+              <p class='form-horizontal'>
+                <%= text_field_tag :search, params[:search], :class => "search-query pull-right", placeholder:"Search" %>
+                <!--<label for="mySubmit" class="btn"><i class="icon-search icon-white pull-right"></i></label>-->
+                <%= submit_tag ''.html_safe, :name => nil, class:'hidden' %>
+              </p>
+            <% end %>
           </div><!--/.nav-collapse -->
 
         </div>
@@ -71,6 +73,7 @@
     <div class="container">
         <div class="row">
           <div class="span9">
+
             <%= bootstrap_flash %>
             <%= yield %>
           </div>
@@ -92,7 +95,6 @@
 
             <% cache('tags') do %>  
               <div class="well sidebar-nav">
-                <h3>Tags cloud</h3>
                 <div id="tag_cloud">
                   <% tag_cloud Book.tag_counts, %w{s m l} do |tag, css_class| %>
                       <%= link_to tag.name, tag_path(u tag.name), class: css_class %>
@@ -100,7 +102,7 @@
                 </div>            
               </div><!--/.well -->
             <% end %>
-            
+
             <%= render :partial => 'layouts/plot' %>
           </div><!--/span-->
           <div class="span3">
@@ -113,6 +115,6 @@
       </footer>
 
     </div> <!-- /container -->
-
+    
   </body>
 </html>

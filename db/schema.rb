@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20130829124301861) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "category"
+    t.boolean  "delta",       default: true, null: false
   end
 
   create_table "chapters", force: true do |t|
