@@ -8,11 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :get_categories, :apply_locale
 
   def apply_locale
-    unless current_user.nil?
       I18n.locale = current_user.language
-    else
-      I18n.locale = I18n.default_locale
-    end
   end
 
  #  def current_ability
@@ -22,9 +18,11 @@ class ApplicationController < ActionController::Base
   # theme/dark.css
   def set_theme
     if ['dark','light'].include?(params[:theme])
-      current_user.theme = params[:theme]+'.css'
-      current_user.save
+      current_user.update!(:theme => params[:theme]+'.css')
+      puts current_user.theme + '!!!!!!!!!!!!!!!!'
+      current_user.save(:validate => false)
     end
+    puts current_user.theme + '!!!!!!!!!!!!!!!!'
     redirect_to :back
   end
 
@@ -32,7 +30,7 @@ class ApplicationController < ActionController::Base
   def set_locale
     if ['en','ru'].include? params[:locale]
       current_user.language = params[:locale] 
-      current_user.save    
+      current_user.save(:validate => false)    
       I18n.locale = params[:locale] || I18n.default_locale
       puts I18n.locale
       redirect_to :back
@@ -51,12 +49,26 @@ class ApplicationController < ActionController::Base
     @categories = ['Movies','Books','Cartoons','Comics']
   end
 
-  
+  def current_user
+    super || guest_user
+  end
 
-  protected
+private
 
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation) }
-    end
+  def guest_user
+   User.find(session[:guest_user_id].nil? ? session[:guest_user_id] = create_guest_user.id : session[:guest_user_id])
+  end
+
+  def create_guest_user
+    u = User.create(:username => "guest_#{Time.now.to_i}#{rand(99)}", :email => "guest_#{Time.now.to_i}#{rand(99)}@example.com")
+    u.save!(:validate => false)
+    u
+  end
+
+protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation) }
+  end
 
 end
