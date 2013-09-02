@@ -76,17 +76,13 @@
           </div>
           <div class="span3">
             <div class="well sidebar-nav">
-              <h3>Sidebar</h3>
-              <% if notice %>
-                  <p class="alert alert-notice"><%= notice %></p>
-              <% end %>
-                <% if user_signed_in? %>
+                <% if current_user.role != 'guest' %>
                     Logged in as <strong><%= current_user.username %></strong>.  <br />
                     <%= link_to t('.Edit profile'), edit_user_registration_path %> |
                     <%= link_to t("Logout"), destroy_user_session_path, method: :delete %>
                 <% else %>
-                    <%= link_to "Sign up", new_user_registration_path %> |
-                    <%= link_to "Login", new_user_session_path %>
+                    <%= link_to t("Sign up"), new_user_registration_path %> |
+                    <%= link_to t(".login"), new_user_session_path %>
                 <% end %> <br>
                 <%= link_to "dark", theme_path(:dark), method: :post %> |
                 <%= link_to "light", theme_path(:light), method: :post %> <br>

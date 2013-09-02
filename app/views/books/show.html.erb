@@ -8,9 +8,9 @@
           <i> <%= t(:by) %> <%= link_to book.user.username, author_path(u  book.user.username) if book.user %> </i> <br>
           <%= book.description %>            
         </div>
-        <%= render :partial => 'like' %>  
+        <%= render :partial => 'like' if can? :like, @book%>  
       </div> 
-      <% if can? :ud, book %> 
+      <% if can? :cud, book %> 
         <div class="form-search form-horizontal">            
             <div class="pull-left">        
             <%= button_to t('.edit', :default => t("helpers.links.edit")),
@@ -60,8 +60,9 @@
     </div>      
   </div>
 <% end %>
-
-<%= button_to t('.new_chapter', :default => t("helpers.links.new_chapter")),
-                        new_book_chapter_path(@book.id),
-                        :method => :get,
-                        :class => 'btn btn-primary' %> 
+<% if can? :cud, @book %>
+  <%= button_to t('.new_chapter', :default => t("helpers.links.new_chapter")),
+                          new_book_chapter_path(@book.id),
+                          :method => :get,
+                          :class => 'btn btn-primary' %>
+<% end %>

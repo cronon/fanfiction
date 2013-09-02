@@ -19,22 +19,17 @@ class ApplicationController < ActionController::Base
   def set_theme
     if ['dark','light'].include?(params[:theme])
       current_user.update!(:theme => params[:theme]+'.css')
-      puts current_user.theme + '!!!!!!!!!!!!!!!!'
-      current_user.save(:validate => false)
     end
-    puts current_user.theme + '!!!!!!!!!!!!!!!!'
     redirect_to :back
   end
 
   # locale/ru
   def set_locale
     if ['en','ru'].include? params[:locale]
-      current_user.language = params[:locale] 
-      current_user.save(:validate => false)    
-      I18n.locale = params[:locale] || I18n.default_locale
-      puts I18n.locale
-      redirect_to :back
+      current_user.update!(:language => params[:locale]) 
+      I18n.locale = params[:locale]      
     end
+    redirect_to :back
   end
 
   def books_per_page
@@ -60,7 +55,8 @@ private
   end
 
   def create_guest_user
-    u = User.create(:username => "guest_#{Time.now.to_i}#{rand(99)}", :email => "guest_#{Time.now.to_i}#{rand(99)}@example.com")
+    token="#{Time.now.to_i}#{rand(99)}"
+    u = User.create(:role => 'guest', :username => "guest_#{token}", :email => "guest_#{token}@example.com")
     u.save!(:validate => false)
     u
   end
