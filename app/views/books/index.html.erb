@@ -1,8 +1,3 @@
-<%- model_class = Book -%>
-<div class="page-header">
-  <!--<h1><%=t '.title', :default => model_class.model_name.human.pluralize(count:2), :count=>2 %></h1> -->
-</div>
-
 <% @books.each do |book| %>
 <% @book = book %>
   <div id='tr<%= book.id %>' class="well sidebar-nav">   
@@ -12,7 +7,7 @@
           <h2><%= link_to book.title, book_path(book) %></h2> 
           <%= book.created_at.to_time.strftime('%H:%M %-d %b %Y') %></td>
           <i> <%= t(:by) %> <%= link_to book.user.username, author_path(u  book.user.username) if book.user %> </i> <br>
-          <%= book.description %>            
+          <%= simple_format book.description %>            
         </div>
         <%= render :partial => 'like' if can? :like, book %>
       </div> 
