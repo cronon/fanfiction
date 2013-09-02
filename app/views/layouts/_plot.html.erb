@@ -1,24 +1,36 @@
  <p><div class="well sidebar-nav">
   <div id='plot'>
-    <script>
-        $(document).ready(function(){
-          <% cache do %>
-            var line1 = <%= raw get_stats %>
-          <% end %>
-            var plot2 = $.jqplot('plot', [line1], {
-            title:'Customized Date Axis', 
-            //gridPadding:{right:35},
-            axes:{
-            xaxis:{
-              renderer:$.jqplot.DateAxisRenderer, 
-              tickOptions:{formatString:'%b %#d, %y'},
-              //min:'May 30, 2008', 
-              //tickInterval:'1 month'
-            }
-            },
-            //series:[{lineWidth:4, markerOptions:{style:'square'}}]
-            });
-        });
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows(<%= raw get_stats %>);
+
+        // Set chart options
+        var options = {'width':150,
+                       'height':300,
+                       'legend' : {position: 'none'}
+                      };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('plot'));
+        chart.draw(data, options);
+      }
     </script>
   <div>  
 </div><!--/.well -->

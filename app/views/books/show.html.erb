@@ -41,7 +41,7 @@
           <i><%= @book.created_at.to_time.strftime('%H:%M %-d %b %Y') %> </i>
         </div>  
       </div> 
-      <% if can? :ud, @book %> 
+      <% if can? :cud, @book %> 
         <div class="form-search form-horizontal">          
             <div class="pull-left">        
             <%= button_to t('.edit', :default => t("helpers.links.edit")),

@@ -1,10 +1,12 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :like]
   impressionist :actions=>[:index,:show]
+  load_and_authorize_resource
+  skip_authorize_resource :only => [:index,:show]
 
   #POST /books/1/like
   def like
-    @book=Book.where(:id => params[:id]).first
+    redirect_to :back if cannot? :like, @book
     @book.liked_by current_user
     respond_to do |format|
       format.js

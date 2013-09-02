@@ -14,21 +14,25 @@
   </div>
 
   <div class="control-group">
-      <%= f.label :category, :class => 'control-label' %>
-      <div class="controls">
-        <%= collection_select(:book, :category, @categories, :to_s, :to_s, {}, {:class => "selectpicker", :'data-style' =>"btn-primary"}) %>
-      </div>
-    </div>
+      <%= f.label :category %>
+  </div>
+  <div class="control-group">
+    <%= collection_select(:book, :category, @categories, :to_s, :to_s, {}, {:class => "selectpicker", :'data-style' =>"btn-primary"}) %>
+  </div>
+    
 
   <div class="control-group">
       <%= f.label :tag_list %>
   </div>
-  <div class="controls" class="select2-container select2-container-multi" >
-      <%= f.text_field :tag_list, data: {autocomplete_source: Book.tag_counts.map(&:name)} %>
+  <div class="control-group" class="select2-container select2-container-multi" style="width:380px;" >
+      <%= f.text_area :tag_list, data: {autocomplete_source: Book.tag_counts.map(&:name)} %>
   </div>
+
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+    <div class="pull-left"> 
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+    </div>
+    <%= button_to t('.cancel', :default => t("helpers.links.cancel")),
                 :back, :class => 'btn' %>
   </div>
 <% end %>
