@@ -25,7 +25,6 @@ module ApplicationHelper
             result[day.strftime]+=book.impressionist_count :start_date => day.beginning_of_day, :end_date => day.end_of_day
         end
     end
-
     result.to_a
   end
 end

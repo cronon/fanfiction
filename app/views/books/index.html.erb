@@ -37,7 +37,7 @@
 <% end %>
 
 <%= will_paginate @books %>
-<% if can? :cud, @books.first %>
+<% if can? :cud, @book %>
 <%= button_to t('.new', :default => t("helpers.links.new")),
             new_book_path,
             :method => :get,

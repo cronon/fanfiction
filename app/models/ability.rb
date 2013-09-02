@@ -11,6 +11,7 @@ class Ability
       elsif user.role == 'user'
         can :read, :all
         can :like, Book
+        can :create, Book
         can :cud, Book, :user_id=>user.id
         can :like, Chapter
         can :cud, Chapter, Chapter.joins(:book).where(books: {user_id: 1}) do |chapter|

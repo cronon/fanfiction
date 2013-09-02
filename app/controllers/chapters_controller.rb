@@ -76,6 +76,10 @@ class ChaptersController < ApplicationController
       @chapter = Chapter.find(params[:id])
     end
 
+    def note_params
+      params.require(:chapter).permit(:title, :content)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def chapter_params
       params.require(:chapter).permit(:title, :content)

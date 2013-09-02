@@ -1,13 +1,11 @@
- <p><div class="well sidebar-nav">
+<% cache('plot', :expires_in => 7.hour) do %>
+  <p><div class="well sidebar-nav">
   <div id='plot'>
     <script>
         $(document).ready(function(){
-          <% cache do %>
             var line1 = <%= raw get_stats %>
-          <% end %>
             var plot2 = $.jqplot('plot', [line1], {
             title: '<%= t '.views_per_day' %>', 
-            //gridPadding:{right:35},
             axesDefaults: {
               min: null
             },
@@ -15,15 +13,14 @@
               y2axes: {min: 5},
               xaxis:{
                 renderer:$.jqplot.DateAxisRenderer, 
-                tickOptions:{formatString:'%b %d'},
-                //min:'May 30, 2008', 
+                tickOptions:{formatString:'%b %d'}, 
                 //tickInterval:'1 month'
               }
             },
-            //series:[{lineWidth:4, markerOptions:{style:'square'}}]
             });
         });
     </script>
   <div>  
-</div><!--/.well -->
-</p>
+  </div><!--/.well -->
+  </p>
+<% end %>

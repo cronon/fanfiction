@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy, :like]
-  impressionist :actions=>[:index,:show]
+  after_action :expire_tags, only: [:update,:create,:destroy]
+  impressionist :actions=>[:show]
   load_and_authorize_resource
   skip_authorize_resource :only => [:index,:show]
 
@@ -40,7 +41,6 @@ class BooksController < ApplicationController
   # GET /books/1.json
   def show
     @book = Book.find(params[:id])
-    @book.description=@book.description.html_safe
     impressionist(@book)
     @chapters=Chapter.where(:book_id => @book.id)
   end
@@ -58,9 +58,7 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = Book.new(book_params)
-
     @book.user_id = current_user.id
-
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
@@ -76,6 +74,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
+    redirect_to :back if cannot? :update, @book
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
@@ -90,6 +89,7 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
+    redirect_to :back if cannot? :destroy, @book
     @book.destroy
     respond_to do |format|
       format.html { redirect_to books_url }
@@ -99,6 +99,11 @@ class BooksController < ApplicationController
   end
 
   private
+
+    def note_params
+      params.require(:book).permit(:title, :description, :tag_list, :category)
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])

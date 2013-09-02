@@ -6,13 +6,18 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_action :get_categories, :apply_locale
+  before_filter do
+    resource = controller_name.singularize.to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
 
   # theme/dark.css
   def set_theme
     if ['dark','light'].include?(params[:theme])
       current_user.update!(:theme => params[:theme]+'.css')
     end
-    redirect_to :back
+    redirect_to :root
   end
 
   # locale/ru
@@ -21,7 +26,7 @@ class ApplicationController < ActionController::Base
       current_user.update!(:language => params[:locale]) 
       I18n.locale = params[:locale]      
     end
-    redirect_to :back
+    redirect_to :root
   end
 
   protected

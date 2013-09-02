@@ -76,27 +76,31 @@
           </div>
           <div class="span3">
             <div class="well sidebar-nav">
-                <% if current_user.role != 'guest' %>
-                    Logged in as <strong><%= current_user.username %></strong>.  <br />
-                    <%= link_to t('.Edit profile'), edit_user_registration_path %> |
-                    <%= link_to t("Logout"), destroy_user_session_path, method: :delete %>
-                <% else %>
-                    <%= link_to t("Sign up"), new_user_registration_path %> |
-                    <%= link_to t(".login"), new_user_session_path %>
-                <% end %> <br>
-                <%= link_to "dark", theme_path(:dark), method: :post %> |
-                <%= link_to "light", theme_path(:light), method: :post %> <br>
-                <%= link_to "en", locale_path(:en), method: :post %> |
-                <%= link_to "ru", locale_path(:ru), method: :post %>
-                </div><!--/.well -->
-              <div class="well sidebar-nav">
-              <h3>Tags cloud</h3>
-              <div id="tag_cloud">
-                <% tag_cloud Book.tag_counts, %w{s m l} do |tag, css_class| %>
-                    <%= link_to tag.name, tag_path(u tag.name), class: css_class %>
-                <% end %>
-              </div>
+              <% if current_user.role != 'guest' %>
+                  Logged in as <strong><%= current_user.username %></strong>.  <br />
+                  <%= link_to t('.Edit profile'), edit_user_registration_path %> |
+                  <%= link_to t("Logout"), destroy_user_session_path, method: :delete %>
+              <% else %>
+                  <%= link_to t("Sign up"), new_user_registration_path %> |
+                  <%= link_to t(".login"), new_user_session_path %>
+              <% end %> <br>
+              <%= link_to "dark", theme_path(:dark), method: :post %> |
+              <%= link_to "light", theme_path(:light), method: :post %> <br>
+              <%= link_to "en", locale_path(:en), method: :post %> |
+              <%= link_to "ru", locale_path(:ru), method: :post %>
             </div><!--/.well -->
+
+            <% cache('tags') do %>  
+              <div class="well sidebar-nav">
+                <h3>Tags cloud</h3>
+                <div id="tag_cloud">
+                  <% tag_cloud Book.tag_counts, %w{s m l} do |tag, css_class| %>
+                      <%= link_to tag.name, tag_path(u tag.name), class: css_class %>
+                  <% end %>
+                </div>            
+              </div><!--/.well -->
+            <% end %>
+            
             <%= render :partial => 'layouts/plot' %>
           </div><!--/span-->
           <div class="span3">
