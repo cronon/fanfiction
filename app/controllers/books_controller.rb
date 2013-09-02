@@ -1,6 +1,5 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy, :like]
-  after_action :expire_tags, only: [:update,:create,:destroy]
   impressionist :actions=>[:show]
   load_and_authorize_resource
   skip_authorize_resource :only => [:index,:show]

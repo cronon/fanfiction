@@ -292,3 +292,7 @@ ru:
   will_paginate:
     previous_label: '<<'
     next_label: '>>'
+  movies: 'Фильмы'
+  books: 'Книги'
+  comics: 'Комиксы'
+  cartoons: 'Мультфильмы'

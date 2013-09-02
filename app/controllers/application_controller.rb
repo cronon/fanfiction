@@ -5,11 +5,16 @@ class ApplicationController < ActionController::Base
 
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  after_action :expire_tags, only: [:update,:create]
   before_action :get_categories, :apply_locale
   before_filter do
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  def expire_tags
+    expire_fragment('tags')
   end
 
   # theme/dark.css
@@ -52,7 +57,7 @@ class ApplicationController < ActionController::Base
     end
 
     def get_categories
-      @categories = ['Movies','Books','Cartoons','Comics']
+      @categories = ['movies','books','cartoons','comics']
     end
 
     def current_user

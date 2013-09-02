@@ -53,7 +53,7 @@
             <ul class="nav">
               <li><%= link_to 'Murzik34', root_path %></li>
               <% @categories.each do |category| %>
-                <li><%= link_to category, category_path(:category => category) %> </li>
+                <li><%= link_to t(category), category_path(:category => category) %> </li>
               <% end %>  
             </ul>
 
@@ -93,7 +93,7 @@
               <%= link_to "ru", locale_path(:ru), method: :post %>
             </div><!--/.well -->
 
-            <% cache('tags') do %>  
+            <% cache(:action => 'application', :part => 'tags') do %>  
               <div class="well sidebar-nav">
                 <div id="tag_cloud">
                   <% tag_cloud Book.tag_counts, %w{s m l} do |tag, css_class| %>

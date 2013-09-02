@@ -22,3 +22,7 @@
 en:
   hello: "Hello world"
   views_per_day: 'Views per day'
+  movies: 'Movies'
+  books: 'Books'
+  comics: 'Comics'
+  cartoons: 'Cartoons'

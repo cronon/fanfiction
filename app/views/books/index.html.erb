@@ -1,34 +1,6 @@
 <% @books.each do |book| %>
 <% @book = book %>
-  <div id='tr<%= book.id %>' class="well sidebar-nav">   
-    <div class="container-fluid"> 
-      <div class="row-fluid">         
-        <div class="span8">
-          <h2><%= link_to book.title, book_path(book) %></h2> 
-          <%= book.created_at.to_time.strftime('%H:%M %-d %b %Y') %></td>
-          <i> <%= t(:by) %> <%= link_to book.user.username, author_path(u  book.user.username) if book.user %> </i> <br>
-          <%= simple_format book.description %>            
-        </div>
-        <%= render :partial => 'like' if can? :like, book %>
-      </div> 
-      <% if can? :cud, book %> 
-        <div class="form-search form-horizontal">          
-            <div class="pull-left">        
-            <%= button_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_book_path(book),
-                        :method => :get, 
-                        :class => 'btn' %>
-            </div>   
-            <%= button_to t('.destroy', :default => t("helpers.links.destroy")),
-                        book_path(book),
-                        :method => :delete,
-                        :remote => true,
-                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                        :class => 'btn btn-danger' %>          
-        </div>
-      <% end %>
-    </div>      
-  </div>
+<%= render :partial => 'book', :lokals => {:is_remote => true} %>
 <% end %>
 
 <%= will_paginate @books %>
