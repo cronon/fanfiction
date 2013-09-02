@@ -7,6 +7,22 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_action :get_categories, :apply_locale
 
+  # theme/dark.css
+  def set_theme
+    if ['dark','light'].include?(params[:theme])
+      current_user.update!(:theme => params[:theme]+'.css')
+    end
+    redirect_to :back
+  end
+
+  # locale/ru
+  def set_locale
+    if ['en','ru'].include? params[:locale]
+      current_user.update!(:language => params[:locale]) 
+      I18n.locale = params[:locale]      
+    end
+    redirect_to :back
+  end
 
   protected
 
@@ -21,23 +37,6 @@ class ApplicationController < ActionController::Base
    #  def current_ability
    #    @current_ability ||= Ability.new(current_user)
     # end
-
-    # theme/dark.css
-    def set_theme
-      if ['dark','light'].include?(params[:theme])
-        current_user.update!(:theme => params[:theme]+'.css')
-      end
-      redirect_to :back
-    end
-
-    # locale/ru
-    def set_locale
-      if ['en','ru'].include? params[:locale]
-        current_user.update!(:language => params[:locale]) 
-        I18n.locale = params[:locale]      
-      end
-      redirect_to :back
-    end
 
     def books_per_page
       10

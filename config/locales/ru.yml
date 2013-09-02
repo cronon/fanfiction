@@ -282,6 +282,7 @@ ru:
   edit: 'Редактировать'
   destroy: 'Удалить'
   by: ''
+  views_per_day: 'Просмотры в день'
   chapters:
     new:
       back: 'Назад'

@@ -39,8 +39,9 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
-    @widget = Book.find(params[:id])
-    impressionist(@widget)
+    @book = Book.find(params[:id])
+    @book.description=@book.description.html_safe
+    impressionist(@book)
     @chapters=Chapter.where(:book_id => @book.id)
   end
 
@@ -57,6 +58,7 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = Book.new(book_params)
+
     @book.user_id = current_user.id
 
     respond_to do |format|
