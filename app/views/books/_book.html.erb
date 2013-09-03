@@ -5,7 +5,9 @@
           <i><%= link_to t(@book.category), category_path(@book.category) %> </i>
           <h2><%= link_to @book.title, book_path(@book) %></h2> 
           <%= @book.created_at.to_time.strftime('%H:%M %-d %b %Y') %></td>
-          <i> <%= t(:by) %><%= link_to @book.user.username, author_path(u  @book.user.username) if @book.user %></i> <br>
+          <i>
+            <%= t(:by) %> <%= link_to @book.user.username, author_path(u  @book.user.username) if @book.user %>
+          </i> <br>
           <%= simple_format @book.description %>            
         </div>
         <%= render :partial => 'like' if can? :like, @book %>

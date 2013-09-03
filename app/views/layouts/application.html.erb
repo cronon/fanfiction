@@ -51,7 +51,9 @@
           <div class="container nav-collapse">
 
             <ul class="nav">
-              <li><%= link_to 'Murzik34', root_path %></li>
+              <li>
+                <%= link_to 'Murzik34', root_path %>
+              </li>
               <% @categories.each do |category| %>
                 <li><%= link_to t(category), category_path(:category => category) %> </li>
               <% end %>  
@@ -111,6 +113,7 @@
         </div><!--/row-->
 
       <footer>
+        <%= image_tag '', :class => 'logo' %>
         <p>&copy; Murzik34 2013</p>
       </footer>
 

@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def expire_tags
-    expire_fragment('tags')
+    expire_fragment(:action => 'application', :part => 'tags')
   end
 
   # theme/dark.css
