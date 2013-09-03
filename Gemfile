@@ -67,7 +67,7 @@ gem 'acts_as_votable', '~> 0.7.1'
 
 gem 'impressionist'
 
-# gem 'actionpack-action_caching'
-# gem 'actionpack-page_caching'
+gem 'actionpack-action_caching'
+gem 'actionpack-page_caching'
 
 gem 'russian', '~> 0.6.0'

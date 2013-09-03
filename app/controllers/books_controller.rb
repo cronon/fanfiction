@@ -1,6 +1,9 @@
 class BooksController < ApplicationController
+  require 'actionpack/action_caching'
   before_action :set_book, only: [:show, :edit, :update, :destroy, :like]
+
   impressionist :actions=>[:show]
+
   load_and_authorize_resource
   skip_authorize_resource :only => [:index,:show]
 
@@ -112,4 +115,5 @@ class BooksController < ApplicationController
     def book_params
       params.require(:book).permit(:title, :description, :tag_list, :category)
     end
+
 end

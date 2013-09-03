@@ -1,1 +1,1 @@
-$('#chapter-<%= @chapter.id %>').html("");
+$('#chapter-<%= @chapter.id %>').remove();

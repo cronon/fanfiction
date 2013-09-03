@@ -1,6 +1,6 @@
 <% @books.each do |book| %>
 <% @book = book %>
-<%= render :partial => 'book', :lokals => {:is_remote => true} %>
+<%= render :partial => 'book', :locals => {:is_remote => true} %>
 <% end %>
 
 <%= will_paginate @books %>

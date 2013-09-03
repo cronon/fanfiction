@@ -75,7 +75,6 @@
     <div class="container">
         <div class="row">
           <div class="span9">
-
             <%= bootstrap_flash %>
             <%= yield %>
           </div>
@@ -83,7 +82,7 @@
             <div class="well sidebar-nav">
               <% if current_user.role != 'guest' %>
                   Logged in as <strong><%= current_user.username %></strong>.  <br />
-                  <%= link_to t('.Edit profile'), edit_user_registration_path %> |
+                  <%= link_to t('Edit profile'), edit_user_registration_path %> |
                   <%= link_to t("Logout"), destroy_user_session_path, method: :delete %>
               <% else %>
                   <%= link_to t("Sign up"), new_user_registration_path %> |
@@ -95,26 +94,27 @@
               <%= link_to "ru", locale_path(:ru), method: :post %>
             </div><!--/.well -->
 
-            <% cache(:action => 'application', :part => 'tags') do %>  
               <div class="well sidebar-nav">
-                <div id="tag_cloud">
+                <div id="tag_cloud" class="container-fluid">
                   <% tag_cloud Book.tag_counts, %w{s m l} do |tag, css_class| %>
                       <%= link_to tag.name, tag_path(u tag.name), class: css_class %>
                   <% end %>
                 </div>            
               </div><!--/.well -->
-            <% end %>
+
 
             <%= render :partial => 'layouts/plot' %>
           </div><!--/span-->
           <div class="span3">
-            
+            <%= image_tag '', :class => 'logo' %>
+          <p>&copy; Murzik34 2013</p>
           </div><!--/span-->
         </div><!--/row-->
 
       <footer>
-        <%= image_tag '', :class => 'logo' %>
-        <p>&copy; Murzik34 2013</p>
+        <div class="container">
+          
+        </div>
       </footer>
 
     </div> <!-- /container -->

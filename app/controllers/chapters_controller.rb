@@ -1,8 +1,11 @@
 class ChaptersController < ApplicationController
   before_action :set_chapter, only: [:show, :edit, :update, :destroy]
   before_filter :load_book
+
   load_and_authorize_resource
   skip_authorize_resource :only => [:index,:show]
+
+  caches_action :show, :index
 
   # GET /chapters
   # GET /chapters.json
